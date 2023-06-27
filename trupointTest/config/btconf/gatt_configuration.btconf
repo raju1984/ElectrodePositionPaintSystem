@@ -1,0 +1,527 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--Custom BLE GATT-->
+<gatt gatt_caching="true" generic_attribute_service="true" header="gatt_db.h" name="Custom BLE GATT" out="gatt_db.c" prefix="gattdb_">
+  
+  <!--Generic Access-->
+  <service advertise="false" name="Generic Access" requirement="mandatory" sourceId="org.bluetooth.service.generic_access" type="primary" uuid="1800">
+    <informativeText>Abstract: The generic_access service contains generic information about the device. All available Characteristics are readonly. </informativeText>
+    
+    <!--Device Name-->
+    <characteristic const="false" id="device_name" name="Device Name" sourceId="org.bluetooth.characteristic.gap.device_name" uuid="2A00">
+      <informativeText/>
+      <value length="16" type="utf-8" variable_length="false">TruPoint+</value>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+        <write authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+    
+    <!--Appearance-->
+    <characteristic const="true" name="Appearance" sourceId="org.bluetooth.characteristic.gap.appearance" uuid="2A01">
+      <informativeText>Abstract: The external appearance of this device. The values are composed of a category (10-bits) and sub-categories (6-bits). </informativeText>
+      <value length="2" type="hex" variable_length="false">0000</value>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+  </service>
+  
+  <!--Device Information-->
+  <service advertise="false" id="device_information" name="Device Information" requirement="mandatory" sourceId="org.bluetooth.service.device_information" type="primary" uuid="180A">
+    <informativeText>Abstract:  The Device Information Service exposes manufacturer and/or vendor information about a device.  Summary:  This service exposes manufacturer information about a device. The Device Information Service is instantiated as a Primary Service. Only one instance of the Device Information Service is exposed on a device.  </informativeText>
+    
+    <!--Manufacturer Name String-->
+    <characteristic const="true" id="manufacturer_name_string" name="Manufacturer Name String" sourceId="org.bluetooth.characteristic.manufacturer_name_string" uuid="2A29">
+      <informativeText>Abstract:  The value of this characteristic is a UTF-8 string representing the name of the manufacturer of the device.  </informativeText>
+      <value length="12" type="utf-8" variable_length="false">UFS Corp</value>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+    
+    <!--System ID-->
+    <characteristic const="false" id="system_id" name="System ID" sourceId="org.bluetooth.characteristic.system_id" uuid="2A23">
+      <informativeText>Abstract:  The SYSTEM ID characteristic consists of a structure with two fields. The first field are the LSOs and the second field contains the MSOs.       This is a 64-bit structure which consists of a 40-bit manufacturer-defined identifier concatenated with a 24 bit unique Organizationally Unique Identifier (OUI). The OUI is issued by the IEEE Registration Authority (http://standards.ieee.org/regauth/index.html) and is required to be used in accordance with IEEE Standard 802-2001.6 while the least significant 40 bits are manufacturer defined.       If System ID generated based on a Bluetooth Device Address, it is required to be done as follows. System ID and the Bluetooth Device Address have a very similar structure: a Bluetooth Device Address is 48 bits in length and consists of a 24 bit Company Assigned Identifier (manufacturer defined identifier) concatenated with a 24 bit Company Identifier (OUI). In order to encapsulate a Bluetooth Device Address as System ID, the Company Identifier is concatenated with 0xFFFE followed by the Company Assigned Identifier of the Bluetooth Address. For more guidelines related to EUI-64, refer to http://standards.ieee.org/develop/regauth/tut/eui64.pdf.  Examples:  If the system ID is based of a Bluetooth Device Address with a Company Identifier (OUI) is 0x123456 and the Company Assigned Identifier is 0x9ABCDE, then the System Identifier is required to be 0x123456FFFE9ABCDE.  </informativeText>
+      <value length="8" type="hex" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+  </service>
+  
+  <!--Voltage Monitor-->
+  <service advertise="false" id="voltage_monitor" name="Voltage Monitor" requirement="mandatory" sourceId="" type="primary" uuid="ad019239-10c0-4686-aff1-ea8517c318e3">
+    <informativeText>This is a Voltage Monitor service.</informativeText>
+    
+    <!--Air Temperature Data-->
+    <characteristic const="false" id="air_temperature_data" name="Air Temperature Data" sourceId="" uuid="2bf59c04-d469-45e0-9370-9276c9b93b25">
+      <informativeText>For Air/Liquid measurement pin PB00</informativeText>
+      <value length="0" type="user" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+        <notify authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+    
+    <!--Ambient Light-->
+    <characteristic const="false" id="ambient_light" name="Ambient Light" sourceId="" uuid="ee98370e-1eb0-451a-8963-3f3235fc1924">
+      <informativeText>Ambient light data pin PC01</informativeText>
+      <value length="0" type="user" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+    
+    <!--DC Voltage-->
+    <characteristic const="false" id="dc_voltage" name="DC Voltage" sourceId="" uuid="dd3e6e60-39b4-472c-bb02-bb5c2d25f68e">
+      <informativeText/>
+      <value length="0" type="user" variable_length="false"/>
+      <properties>
+        <notify authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+    
+    <!--Ware Temperature-->
+    <characteristic const="false" id="ware_temperature" name="Ware Temperature" sourceId="" uuid="076eeeea-742d-4b5a-90bf-9cc9ca58cdb1">
+      <informativeText/>
+      <value length="0" type="user" variable_length="false"/>
+      <properties>
+        <notify authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+    
+    <!--CDC -->
+    <characteristic const="false" id="cdc" name="CDC " sourceId="" uuid="313b8332-8315-4b89-9b62-f4650f62133a">
+      <informativeText/>
+      <value length="0" type="user" variable_length="false"/>
+      <properties>
+        <notify authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+    
+    <!--Die Temperature-->
+    <characteristic const="false" id="die_temperature" name="Die Temperature" sourceId="" uuid="1d4a96fb-c097-4de2-9ec8-de6212c4ca90">
+      <informativeText/>
+      <value length="0" type="user" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+        <notify authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+    
+    <!--VAC-->
+    <characteristic const="false" id="vac" name="VAC" sourceId="" uuid="6bc913e0-08a5-4dec-a362-675b8cc35488">
+      <informativeText/>
+      <value length="0" type="user" variable_length="false"/>
+      <properties>
+        <notify authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+    
+    <!--Air Logs-->
+    <characteristic const="false" id="air_logs" name="Air Logs" sourceId="" uuid="f3422eae-c7f1-44a9-b7c8-2c65cc087ae8">
+      <informativeText>Ambient light data logs pin PC01</informativeText>
+      <value length="0" type="user" variable_length="false"/>
+      <properties>
+        <notify authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+    
+    <!--DC volt Logs-->
+    <characteristic const="false" id="dc_volt_logs" name="DC volt Logs" sourceId="" uuid="1d913d00-73cf-4550-9099-4124bfa2b6f9">
+      <informativeText/>
+      <value length="0" type="user" variable_length="false"/>
+      <properties>
+        <notify authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+    
+    <!--Ware Temperature Logs-->
+    <characteristic const="false" id="ware_temp_logs" name="Ware Temperature Logs" sourceId="" uuid="59c0e661-f71d-4ae9-a4c0-0d40fb6fe291">
+      <informativeText/>
+      <value length="0" type="user" variable_length="false"/>
+      <properties>
+        <notify authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+    
+    <!--CDC Logs-->
+    <characteristic const="false" id="cdc_logs" name="CDC Logs" sourceId="" uuid="f39708e4-cd88-4e28-85e8-085efb4edf90">
+      <informativeText/>
+      <value length="0" type="user" variable_length="false"/>
+      <properties>
+        <notify authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+    
+    <!--Peak Count Logs-->
+    <characteristic const="false" id="peak_count_logs" name="Peak Count Logs" sourceId="" uuid="b1aeb2c2-171b-4682-8753-22fd2707167b">
+      <informativeText/>
+      <value length="0" type="user" variable_length="false"/>
+      <properties>
+        <notify authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+    
+    <!--VAC Logs-->
+    <characteristic const="false" id="vac_logs" name="VAC Logs" sourceId="" uuid="aa210683-edc3-4147-a47d-8239d5835c7f">
+      <informativeText>Analog Volts AC pin PA0</informativeText>
+      <value length="0" type="user" variable_length="false"/>
+      <properties>
+        <notify authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+    
+    <!--Count Seconds-->
+    <characteristic const="false" id="count_seconds" name="Count Seconds" sourceId="" uuid="58016ae9-5c10-42e2-bc71-bcea1eb84eff">
+      <informativeText>For the count of seconds</informativeText>
+      <value length="0" type="user" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+        <notify authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+    
+    <!--Log Count-->
+    <characteristic const="false" id="log_count" name="Log Count" sourceId="" uuid="351db5a9-b94b-46ee-8302-5ccc4041ebdb">
+      <informativeText>For the counting of number of logs</informativeText>
+      <value length="0" type="user" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+        <notify authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+    
+    <!--LED Color-->
+    <characteristic const="false" id="led_color" name="LED Color" sourceId="" uuid="d8152fe9-fa5f-47a6-ab14-a0cfbba548c2">
+      <informativeText/>
+      <value length="0" type="user" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+        <write authenticated="false" bonded="false" encrypted="false"/>
+        <notify authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+    
+    <!--Firmware Version-->
+    <characteristic const="false" id="firmware_version" name="Firmware Version" sourceId="" uuid="b614e4b1-4b21-4aac-a3c3-02882794f85b">
+      <informativeText/>
+      <value length="0" type="user" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+        <notify authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+    
+    <!--Maximum Battery-->
+    <characteristic const="false" id="battery_max" name="Maximum Battery" sourceId="" uuid="96fb2677-3548-474a-be92-06149d4c5d3f">
+      <informativeText/>
+      <value length="0" type="user" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+        <notify authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+    
+    <!--Max Die Temperature-->
+    <characteristic const="false" id="die_temp_max" name="Max Die Temperature" sourceId="" uuid="3f89a105-cc2f-4afe-90db-c7eb67472a23">
+      <informativeText/>
+      <value length="0" type="user" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+        <notify authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+    
+    <!--Battery Percentage-->
+    <characteristic const="false" id="battery_percent" name="Battery Percentage" sourceId="" uuid="042b93ed-095b-47d6-9a09-ef934aa4147e">
+      <informativeText/>
+      <value length="0" type="user" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+  </service>
+  
+  <!--Automation IO-->
+  <service advertise="false" id="automation_io" name="Automation IO" requirement="mandatory" sourceId="org.bluetooth.service.automation_io" type="primary" uuid="1815">
+    <informativeText>Abstract:  The Automation IO service is used to expose the analog inputs/outputs and digital input/outputs of a generic IO module (IOM).  </informativeText>
+    
+    <!--Arm-->
+    <characteristic const="false" id="arm" name="Arm" sourceId="" uuid="74ee93a8-9e83-4389-9980-886c9344b7c9">
+      <informativeText/>
+      <value length="0" type="user" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+        <write authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+    
+    <!--Interzone Timeout-->
+    <characteristic const="false" id="interzone_timeout" name="Interzone Timeout" sourceId="" uuid="a6b07d2a-771c-4960-85fc-9fd455a7e60b">
+      <informativeText>Interzone_timeout_configurable</informativeText>
+      <value length="0" type="user" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+        <write authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+    
+    <!--Set Voltage Trigger-->
+    <characteristic const="false" id="set_voltage_trigger" name="Set Voltage Trigger" sourceId="" uuid="15dfcbeb-b2e2-42a6-b0ac-c9b4f5d4041d">
+      <informativeText>Voltage trigger</informativeText>
+      <value length="0" type="user" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+        <write authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+    
+    <!--Enable Trigger-->
+    <characteristic const="false" id="enable_trigger" name="Enable Trigger" sourceId="" uuid="6b496658-5c1f-4d61-b2af-15b13862f485">
+      <informativeText>This is to select the trigger level : 0-&gt;Light 1-&gt;voltage</informativeText>
+      <value length="0" type="user" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+        <write authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+    
+    <!--Output Toggle-->
+    <characteristic const="false" id="output_toggle" name="Output Toggle" sourceId="" uuid="3865ffa1-53b3-42e9-8c7f-423387ba9b30">
+      <informativeText/>
+      <value length="0" type="user" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+        <write authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+    
+    <!--Peak Seconds-->
+    <characteristic const="false" id="peak_seconds" name="Peak Seconds" sourceId="" uuid="3dea7fcc-d4ed-46bd-aad7-b61ab6dac94d">
+      <informativeText/>
+      <value length="0" type="user" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+        <write authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+    
+    <!--Threshold Count-->
+    <characteristic const="false" id="threshold_count" name="Threshold Count" sourceId="" uuid="23d60439-7ae8-40cc-94c5-04f15c4d4659">
+      <informativeText/>
+      <value length="0" type="user" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+        <write authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+    
+    <!--Color Variant-->
+    <characteristic const="false" id="color_variant" name="Color Variant" sourceId="" uuid="93e4f597-2c8f-4bc9-9ae4-1432a5b0f1b0">
+      <informativeText/>
+      <value length="0" type="user" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+        <write authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+    
+    <!--CDC Max Logs-->
+    <characteristic const="false" id="cdc_max_logs" name="CDC Max Logs" sourceId="" uuid="5a151811-f61c-472b-a130-1b6ce89530d8">
+      <informativeText/>
+      <value length="0" type="user" variable_length="false"/>
+      <properties>
+        <notify authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+    
+    <!--Timer-->
+    <characteristic const="false" id="timer" name="Timer" sourceId="" uuid="40e2af6f-4948-45cf-a81d-74957f82272f">
+      <informativeText/>
+      <value length="0" type="user" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+        <write authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+    
+    <!--Memory Test-->
+    <characteristic const="false" id="memory_test" name="Memory Test" sourceId="" uuid="71509473-8912-40c5-a66f-02251c8b8dcf">
+      <informativeText/>
+      <value length="0" type="user" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+    
+    <!--Color Test-->
+    <characteristic const="false" id="color_test" name="Color Test" sourceId="" uuid="1758eb79-0eea-4012-8b7b-71a22332f70d">
+      <informativeText/>
+      <value length="0" type="hex" variable_length="false">00</value>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+        <write authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+    
+    <!--Reset-->
+    <characteristic const="false" id="reset" name="Reset" sourceId="" uuid="ca039ddc-0199-4450-ac7a-0d8b696369f2">
+      <informativeText/>
+      <value length="0" type="hex" variable_length="false">00</value>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+        <write authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+    
+    <!--Null DC Current -->
+    <characteristic const="false" id="null_dc_current" name="Null DC Current " sourceId="" uuid="8191f887-a64c-424e-8cfb-91f4d478ebb1">
+      <informativeText/>
+      <value length="0" type="user" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+        <write authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+    
+    <!--Data Runs-->
+    <characteristic const="false" id="data_runs" name="Data Runs" sourceId="" uuid="2a61ea04-e55b-48be-b0b9-ad30101975b1">
+      <informativeText>Stores the total run performed</informativeText>
+      <value length="0" type="user" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+    
+    <!--Peak Liquid Temperature-->
+    <characteristic const="false" id="peak_liq_temp" name="Peak Liquid Temperature" sourceId="" uuid="0b1b1e3c-2988-4dbd-a868-82ab653f513c">
+      <informativeText/>
+      <value length="0" type="user" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+    
+    <!--Peak Ware Temperature-->
+    <characteristic const="false" id="peak_ware_temp" name="Peak Ware Temperature" sourceId="" uuid="e5e0b056-4e87-4cee-a605-ce18ce88caec">
+      <informativeText/>
+      <value length="0" type="user" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+    
+    <!--Peak DC Volt-->
+    <characteristic const="false" id="peak_dc_volt" name="Peak DC Volt" sourceId="" uuid="5265deb8-a569-494b-a5ff-ccfd3d7a5303">
+      <informativeText/>
+      <value length="0" type="user" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+    
+    <!--Peak AC Volt-->
+    <characteristic const="false" id="peak_ac_volt" name="Peak AC Volt" sourceId="" uuid="fa2b1907-7f43-46a2-9945-9cb9e529315f">
+      <informativeText/>
+      <value length="0" type="user" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+    
+    <!--VXKey-->
+    <characteristic const="false" id="vxkey" name="VXKey" sourceId="" uuid="2d527d13-ba82-42fe-a642-d07e778b7a6b">
+      <informativeText/>
+      <value length="0" type="user" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+    
+    <!--Peak Second 8V-->
+    <characteristic const="false" id="peak_second_8" name="Peak Second 8V" sourceId="" uuid="d779282d-7a27-43bd-8b0a-e536131bd25e">
+      <informativeText/>
+      <value length="0" type="user" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+    
+    <!--Error Logs-->
+    <characteristic const="false" id="error_logs" name="Error Logs" sourceId="" uuid="f4716454-f268-40e7-8645-79f8f5053213">
+      <informativeText/>
+      <value length="0" type="user" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+    
+    <!--VDD-->
+    <characteristic const="false" id="vdd" name="VDD" sourceId="" uuid="4c700f6f-1624-43c9-ab87-2bf0c0f39232">
+      <informativeText/>
+      <value length="0" type="user" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+        <write authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+    
+    <!--Calibration-->
+    <characteristic const="false" id="calibration" name="Calibration" sourceId="" uuid="1144f275-368d-4c2c-8276-5cc8cbd3123d">
+      <informativeText/>
+      <value length="0" type="user" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+        <write authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+    
+    <!--MAC-->
+    <characteristic const="false" id="mac" name="MAC" sourceId="" uuid="ad5a7d81-9328-48b3-833f-099c454b6199">
+      <informativeText/>
+      <value length="0" type="user" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+    
+    <!--Alit_threshold-->
+    <characteristic const="false" id="alit_threshold" name="Alit_threshold" sourceId="" uuid="78fc390b-012e-490a-8a08-c6cdf1dedf87">
+      <informativeText/>
+      <value length="0" type="user" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+        <write authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+    
+    <!--TBAT-->
+    <characteristic const="false" id="tbat" name="TBAT" sourceId="" uuid="ad17a5d9-e804-42d8-9fb3-d11571f62606">
+      <informativeText/>
+      <value length="0" type="user" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+    
+    <!--Alit Value-->
+    <characteristic const="false" id="alit_val" name="Alit Value" sourceId="" uuid="e893d217-f7e5-4753-b33f-6022e9838eba">
+      <informativeText/>
+      <value length="0" type="hex" variable_length="false">00</value>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+    
+    <!--Timestamp-->
+    <characteristic const="false" id="timestamp" name="Timestamp" sourceId="" uuid="492fa02d-fd2e-44df-8bb3-140968d86c3f">
+      <informativeText/>
+      <value length="0" type="user" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+        <write authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+  </service>
+</gatt>
